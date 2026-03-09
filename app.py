@@ -1,15 +1,15 @@
 import json
 import uuid
-import os
+import numpy as np
 from flask import Flask, request, jsonify, render_template
+from sklearn.metrics.pairwise import cosine_similarity
 from mistralai import Mistral
 
 app = Flask(__name__)
 
-# Get API key from environment variable
-client = Mistral(api_key=os.environ.get("moO0jReu6yP6B7tsDYYMXfSpiGbIp8S3"))
+client = Mistral(api_key="moO0jReu6yP6B7tsDYYMXfSpiGbIp8S3")
 
-# Load documents
+# Load docs
 with open("docs.json") as f:
     documents = json.load(f)
 
@@ -28,26 +28,26 @@ def create_embedding(text):
     )
     return response.data[0].embedding
 
-# Prepare chunks and embeddings
+# Build vector store
 for doc in documents:
     for chunk in chunk_text(doc["content"]):
         chunks.append(chunk)
         embeddings.append(create_embedding(chunk))
 
-sessions = {}
+embeddings = np.array(embeddings)
 
-def similarity(a, b):
-    return sum(x*y for x, y in zip(a, b))
+sessions = {}
 
 def retrieve(query):
 
     query_embedding = create_embedding(query)
 
-    sims = []
-    for emb in embeddings:
-        sims.append(similarity(query_embedding, emb))
+    sims = cosine_similarity(
+        [query_embedding],
+        embeddings
+    )[0]
 
-    top_idx = sorted(range(len(sims)), key=lambda i: sims[i], reverse=True)[:3]
+    top_idx = sims.argsort()[-3:][::-1]
 
     results = []
     scores = []
@@ -109,9 +109,10 @@ def chat():
 
     retrieved, scores = retrieve(message)
 
-    if not scores or max(scores) < 0.5:
+    if max(scores) < 0.5:
         reply = "I don't have enough information to answer that."
         tokens = 0
+
     else:
 
         context = "\n".join(retrieved)
@@ -134,5 +135,4 @@ def chat():
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
