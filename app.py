@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 client = Mistral(api_key="abcd")
 
-# Load docs
+
 with open("docs.json") as f:
     documents = json.load(f)
 
@@ -28,7 +28,7 @@ def create_embedding(text):
     )
     return response.data[0].embedding
 
-# Build vector store
+
 for doc in documents:
     for chunk in chunk_text(doc["content"]):
         chunks.append(chunk)
