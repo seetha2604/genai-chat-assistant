@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Reset Password",
+    "content": "Users can reset their password from Settings > Security. After clicking reset, they must verify their email and create a new password."
+  },
+  {
+    "title": "Account Creation",
+    "content": "Users can create an account by clicking the Sign Up button on the homepage and filling in their email, password, and profile details."
+  },
+  {
+    "title": "Update Email",
+    "content": "Users can update their email address from Profile Settings under Account Information."
+  },
+  {
+    "title": "Delete Account",
+    "content": "Users can permanently delete their account from Settings > Privacy > Delete Account."
+  },
+  {
+    "title": "Enable Two Factor Authentication",
+    "content": "Two-factor authentication can be enabled from Security Settings to improve account safety."
+  },
+
+  {
+    "title": "Profile Update",
+    "content": "Users can update their profile details from the profile settings page."
+},
+
+{
+    "title": "Contact Support",
+    "content": "Users can contact support through the Help Center or email support@company.com."
+},
+
+{
+  "title": "Password Requirements",
+  "content": "Passwords must be at least 8 characters long and contain a number and special character."
+},
+{
+  "title": "Assistant Name",
+  "content": "The assistant's name is Luna Assistant. It is designed to answer questions using the provided knowledge base documents."
+},
+{
+  "title": "Login Issues",
+  "content": "If users cannot log in to their account, they should first check their email and password. If the issue continues, they can reset their password or contact support."
+},
+{
+  "title": "Account Security Tips",
+  "content": "Users should enable two-factor authentication, use strong passwords, and avoid sharing login credentials to keep their accounts secure."
+}
+
+]
