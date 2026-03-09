@@ -1,8 +1,6 @@
 import json
 import uuid
-import numpy as np
 from flask import Flask, request, jsonify, render_template
-from sklearn.metrics.pairwise import cosine_similarity
 from mistralai import Mistral
 
 app = Flask(__name__)
