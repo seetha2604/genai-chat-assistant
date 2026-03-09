@@ -7,7 +7,7 @@ from mistralai import Mistral
 
 app = Flask(__name__)
 
-client = Mistral(api_key="moO0jReu6yP6B7tsDYYMXfSpiGbIp8S3")
+client = Mistral(api_key="abcd")
 
 # Load docs
 with open("docs.json") as f:
